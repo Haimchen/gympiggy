@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import Store from '../../store/Store';
 
 class CreatePiggyScreen extends React.Component {
 
@@ -8,7 +9,10 @@ class CreatePiggyScreen extends React.Component {
   }
 
   create = () => {
-
+    //TODO validate name
+    Store.saveNewPiggy(this.state.text)
+    this.setState({ text: '' })
+    //navigate to page for this piggy
   }
 
   render() {
@@ -16,12 +20,17 @@ class CreatePiggyScreen extends React.Component {
       <View style={styles.container}>
         <Text>Create a new Piggy to start collecting rewards:</Text>
        <TextInput
+            value={this.state.text}
             style={styles.input}
             placeholder="What should the name of this piggy be?"
             onChangeText={(text) => this.setState({text})}
+            onSubmitEditing={this.create}
+            autoCorrect={false}
+            clearButtonMode='always'
+            returnKeyLabel='Create'
           />
       <Button onPress={this.create} title="Create Piggy"/>
-       <Button onPress={() => this.props.navigation.navigate('Home')} title="Back Home" />
+       <Button onPress={() => this.props.navigation.navigate('Home')} title="x Cancel" />
      </View>
     )
   }
@@ -31,7 +40,8 @@ class CreatePiggyScreen extends React.Component {
 const styles = StyleSheet.create({
   input: {
     height: 40,
-    width: '100%',
+    minWidth: 60,
+    // width: '100%',
     borderColor: 'grey',
   },
   container: {
