@@ -55,8 +55,12 @@ const Store = {
       if(err && err.length >= 1) { callback && callback([]) }
       else {
         console.log(res)
+        const piggys = res.map((outerArray) => {
+          const piggyObj = outerArray[1]
+          return JSON.parse(piggyObj)
+        })
         if (callback) {
-          callback(res)
+          callback(piggys)
         }
       }
     })

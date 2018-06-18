@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
-import Store from '../../store/Store';
+import Store from 'src/store/Store';
 
 class CreatePiggyScreen extends React.Component {
 
