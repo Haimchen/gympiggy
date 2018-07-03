@@ -23,8 +23,15 @@ class HomeScreen extends React.Component {
         <Button onPress={() => this.props.navigation.navigate('AddPiggy')} title="Create new Piggy" />
         { this.state.piggyList.length > 0 &&
           <FlatList
+            keyExtractor={(piggy) => piggy.id}
             data={this.state.piggyList}
-            renderItem={({item, index}) => <Text key={item.id || index}>{`${index}: ${item.name}`}</Text>}
+            renderItem={
+              ({item, index}) =>
+                <Text key={item.id || index}>{`${index}:
+                  ${item.name}`}
+                  <Button onPress={() => this.props.navigation.navigate('Piggy', { piggy: item })} title={'view'}/>
+                </Text>
+            }
           />
         }
       </View>
